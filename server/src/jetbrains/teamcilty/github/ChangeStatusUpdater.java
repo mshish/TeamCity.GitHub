@@ -129,16 +129,20 @@ public class ChangeStatusUpdater {
 
       @NotNull
       private String getGitHubChangeText(@NotNull final SRunningBuild build) {
-        if (description == null) {
           final String text = build.getStatusDescriptor().getText();
-          if (text != null) {
-            return "Finished TeamCity Build " + build.getFullName() + ": " + text;
+          String prefix = "";
+
+          if (description != null) {
+            prefix = description;
           } else {
-            return "Finished TeamCity Build " + build.getFullName();
+            prefix = "Finished TeamCity Build " + build.getFullName();
           }
-        } else {
-          return description;
-        }
+
+          if (text != null) {
+            return prefix + ": " + text;
+          } else {
+            return prefix;
+          }
       }
 
       @NotNull
