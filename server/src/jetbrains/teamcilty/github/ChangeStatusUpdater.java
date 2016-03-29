@@ -137,7 +137,7 @@ public class ChangeStatusUpdater {
             return "Finished TeamCity Build " + build.getFullName();
           }
       } else {
-        return description
+        return description;
       }
 
       @NotNull
