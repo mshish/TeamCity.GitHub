@@ -81,7 +81,16 @@
       </span>
     </td>
   </tr>
-
+  <tr>
+    <th>Description:</th>
+    <td>
+      <props:textProperty name="${keys.descriptionKey}" className="longField"/>
+      <span class="error" id="error_${keys.descriptionKey}"></span>
+      <span class="smallNote">
+        Specify GitHub status description. Leave blank for 'default'
+      </span>
+    </td>
+  </tr>
 </l:settingsGroup>
 
 <tr>

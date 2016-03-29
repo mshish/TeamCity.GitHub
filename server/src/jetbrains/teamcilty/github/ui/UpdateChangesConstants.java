@@ -31,6 +31,7 @@ public class UpdateChangesConstants {
   public String getRepositoryNameKey() { return "guthub_repo"; }
   public String getRepositoryOwnerKey() { return "guthub_owner"; }
   public String getContextKey() { return "guthub_context"; }
+  public String getDescriptionKey() {return "github_description";}
   public String getReportOnKey() { return "github_report_on"; }
   public String getReportOnStartAndFinishValue() { return GitHubApiReportEvent.ON_START_AND_FINISH.getValue(); }
   public String getReportOnStartValue() { return GitHubApiReportEvent.ON_START.getValue(); }

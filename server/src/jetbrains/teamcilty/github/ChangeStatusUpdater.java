@@ -88,6 +88,7 @@ public class ChangeStatusUpdater {
     final String repositoryOwner = feature.getParameters().get(C.getRepositoryOwnerKey());
     final String repositoryName = feature.getParameters().get(C.getRepositoryNameKey());
     @Nullable final String context = feature.getParameters().get(C.getContextKey());
+    @Nullable final String description = feature.getParameters().get(C.getDescriptionKey());
     final boolean addComments = !StringUtil.isEmptyOrSpaces(feature.getParameters().get(C.getUseCommentsKey()));
     final boolean useGuestUrls = !StringUtil.isEmptyOrSpaces(feature.getParameters().get(C.getUseGuestUrlsKey()));
 
@@ -123,17 +124,20 @@ public class ChangeStatusUpdater {
 
         final GitHubChangeState status = getGitHubChangeState(build);
         final String text = getGitHubChangeText(build);
-        scheduleChangeUpdate(version, build, "Finished TeamCity Build " + build.getFullName() + " " + text, status);
+        scheduleChangeUpdate(version, build, text, status);
       }
 
       @NotNull
       private String getGitHubChangeText(@NotNull final SRunningBuild build) {
-        final String text = build.getStatusDescriptor().getText();
-        if (text != null) {
-          return ": " + text;
-        } else {
-          return "";
-        }
+        if (description == null) {
+          final String text = build.getStatusDescriptor().getText();
+          if (text != null) {
+            return "Finished TeamCity Build " + build.getFullName() + ": " + text;
+          } else {
+            return "Finished TeamCity Build " + build.getFullName();
+          }
+      } else {
+        return description
       }
 
       @NotNull
